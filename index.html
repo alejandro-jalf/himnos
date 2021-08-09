@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Himnos</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Himnos</h1>
+    
+        <div class="form-group">
+            <label for="inputHimnario">Himnario</label>
+            <input id="inputHimnario" class="form-control" type="text" v-model="formHimno.himnario" @keyup.enter="$refs.hNumber.focus()">
+        </div>
+    
+        <div class="form-group">
+            <label for="inputNumber">Numero</label>
+            <input id="inputNumber" ref="hNumber" class="form-control" type="number" v-model="formHimno.number" min="0" @keyup.enter="$refs.hTitle.focus()">
+        </div>
+    
+        <div class="form-group">
+            <label for="inputTitle">Titulo</label>
+            <input id="inputTitle" ref="hTitle" class="form-control" type="text" v-model="formHimno.title" @keyup.enter="$refs.hContent.focus()">
+        </div>
+    
+        <button class="btn btn-primary" type="button" @click="saveHimno()">Agregar</button>
+        <button class="btn btn-warning" type="button" @click="cleanCamps()">Limpiar</button>
+    
+        <div class="form-group">
+            <label for="areaContenido">Contenido</label>
+            <textarea id="areaContenido" ref="hContent" class="form-control" v-model="formHimno.content" rows="15" @keyup.enter="saveHimno()"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="button" @click="toggleShowData">Data</button>
+        <transition name="fade">
+            <div v-if="showData" class="mt-3 mb-4">
+                <div class="form-group">
+                    <label for="inputUrl">UrlBase</label>
+                    <input id="inputUrl" class="form-control" type="password" v-model="formData.url_base">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputToken">Token</label>
+                    <input id="inputToken" class="form-control" type="password" v-model="formData.token">
+                </div>
+
+                <button class="btn btn-primary" type="button" @click="saveData()">Save</button>
+            </div>
+        </transition>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
